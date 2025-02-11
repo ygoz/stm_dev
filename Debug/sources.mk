@@ -24,6 +24,7 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
+Core/ThreadSafe \
 Drivers/BSP/Components/lan8742 \
 Drivers/STM32H7xx_HAL_Driver/Src \
 LWIP/App \

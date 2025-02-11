@@ -17,6 +17,15 @@
 #include "cmsis_os.h"
 
 
+osThreadId_t httpThreadHandle;
+const osThreadAttr_t httpTask_attributes = {
+    .name = "http_thread",
+    .stack_size = 2048,
+    .priority = (osPriority_t) osPriorityNormal,
+};
+
+
+
 const char http_header[] =
 	"HTTP/1.1 200 OK\r\n"
 	"Content-Type: text/plain\r\n"
@@ -70,7 +79,7 @@ static void http_server(struct netconn *conn)
 }
 
 
-static void http_thread(void *arg)
+void http_thread(void *arg)
 {
   struct netconn *conn, *newconn;
   err_t err, accept_err;
@@ -98,6 +107,7 @@ static void http_thread(void *arg)
           http_server(newconn);
 
           /* delete connection */
+          netconn_close(newconn);
           netconn_delete(newconn);
         }
       }
@@ -108,7 +118,7 @@ static void http_thread(void *arg)
 
 void http_server_init()
 {
-  sys_thread_new("http_thread", http_thread, NULL, 4096, osPriorityNormal);
+  sys_thread_new("http_thread", http_thread, NULL, 2048, osPriorityNormal);
 }
 
 

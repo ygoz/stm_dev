@@ -15,12 +15,13 @@
 #include <stdio.h>
 #include "httpserver.h"
 #include "cmsis_os.h"
+#include "main.h"
 
 
 osThreadId_t httpThreadHandle;
 const osThreadAttr_t httpTask_attributes = {
     .name = "http_thread",
-    .stack_size = 2048,
+    .stack_size = 4096,
     .priority = (osPriority_t) osPriorityNormal,
 };
 
@@ -113,12 +114,17 @@ void http_thread(void *arg)
       }
     }
   }
+
 }
 
 
-void http_server_init()
+void http_server_init(void *arg)
 {
+  osSemaphoreAcquire(startDefaultTaskSemaphore, osWaitForever);
   sys_thread_new("http_thread", http_thread, NULL, 2048, osPriorityNormal);
 }
 
-
+//void http_server_thread_init()
+//{
+//	http_thread(*arg);
+//}

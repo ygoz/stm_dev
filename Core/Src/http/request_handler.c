@@ -6,15 +6,16 @@
  */
 
 #include "http/request_type.h"
-
+#include "http/routers/get_router.h"
+#include "http/routers/post_router.h"
 
 // Function to handle the request based on the type
-void handle_request(HttpRequestType request_type) {
+void handle_request(struct netconn *conn, HttpRequestType request_type) {
 	int counter = 0;
     switch (request_type) {
         case HTTP_GET:
-            // Add GET-specific logic here
-            break;
+        	GET_requests_router(conn);
+//            break;
 
         case HTTP_POST:
         	counter++;

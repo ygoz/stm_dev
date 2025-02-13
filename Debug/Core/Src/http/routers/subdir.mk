@@ -6,15 +6,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/http/routers/get_router.c \
-../Core/Src/http/routers/post_router.c 
+../Core/Src/http/routers/post_router.c \
+../Core/Src/http/routers/status_codes.c 
 
 OBJS += \
 ./Core/Src/http/routers/get_router.o \
-./Core/Src/http/routers/post_router.o 
+./Core/Src/http/routers/post_router.o \
+./Core/Src/http/routers/status_codes.o 
 
 C_DEPS += \
 ./Core/Src/http/routers/get_router.d \
-./Core/Src/http/routers/post_router.d 
+./Core/Src/http/routers/post_router.d \
+./Core/Src/http/routers/status_codes.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -24,7 +27,7 @@ Core/Src/http/routers/%.o Core/Src/http/routers/%.su Core/Src/http/routers/%.cyc
 clean: clean-Core-2f-Src-2f-http-2f-routers
 
 clean-Core-2f-Src-2f-http-2f-routers:
-	-$(RM) ./Core/Src/http/routers/get_router.cyclo ./Core/Src/http/routers/get_router.d ./Core/Src/http/routers/get_router.o ./Core/Src/http/routers/get_router.su ./Core/Src/http/routers/post_router.cyclo ./Core/Src/http/routers/post_router.d ./Core/Src/http/routers/post_router.o ./Core/Src/http/routers/post_router.su
+	-$(RM) ./Core/Src/http/routers/get_router.cyclo ./Core/Src/http/routers/get_router.d ./Core/Src/http/routers/get_router.o ./Core/Src/http/routers/get_router.su ./Core/Src/http/routers/post_router.cyclo ./Core/Src/http/routers/post_router.d ./Core/Src/http/routers/post_router.o ./Core/Src/http/routers/post_router.su ./Core/Src/http/routers/status_codes.cyclo ./Core/Src/http/routers/status_codes.d ./Core/Src/http/routers/status_codes.o ./Core/Src/http/routers/status_codes.su
 
 .PHONY: clean-Core-2f-Src-2f-http-2f-routers
 

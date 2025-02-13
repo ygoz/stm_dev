@@ -13,6 +13,7 @@
 "./Core/Src/http/request_type.o"
 "./Core/Src/http/routers/get_router.o"
 "./Core/Src/http/routers/post_router.o"
+"./Core/Src/http/routers/status_codes.o"
 "./Core/Startup/startup_stm32h723zgtx.o"
 "./Core/ThreadSafe/newlib_lock_glue.o"
 "./Drivers/BSP/Components/lan8742/lan8742.o"

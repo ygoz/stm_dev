@@ -1,7 +1,7 @@
-
-
-
-
+#include <string.h>
+#include "lwip/api.h" // For netconn functions
+#include "http/extract_http_header_segment.h"
+#include "http/routers/get_router.h"
 //const char end_of_http_headers[]= "\r\n\r\n";
 //
 //const char http_header[] =
@@ -14,12 +14,12 @@
 //const char response_body[] = "hello this is http";
 //
 //
-//const char http_post_response[] =
-//                        "HTTP/1.1 200 OK\r\n"
-//                        "Content-Type: application/json\r\n"
-//                        "Content-Length: 17\r\n"
-//                        "\r\n"
-//                        "{\"status\":\"OK\"}";
+const char http_post_response[] =
+                        "HTTP/1.1 200 OK\r\n"
+                        "Content-Type: application/json\r\n"
+                        "Content-Length: 15\r\n"
+                        "\r\n"
+                        "{\"status\":\"OK\"}";
 
 
 
@@ -32,10 +32,12 @@
 
 
 
-//			if (strncmp((char const *)rx_buffer, "GET /index.html", 15) == 0) {
-//
-//
-//			    netconn_write(conn, http_header, strlen(http_header), NETCONN_NOCOPY);
-//			    netconn_write(conn, response_body, strlen(response_body), NETCONN_NOCOPY);
-//
-//			}
+
+
+
+
+void GET_requests_router(struct netconn *conn){
+	if (strncmp(http_header_buffer, "GET /index.html", 15) == 0) {
+		netconn_write(conn, http_post_response, strlen(http_post_response), NETCONN_NOCOPY);
+	}
+}

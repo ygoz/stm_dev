@@ -6,7 +6,8 @@
  */
 
 #include "http/request_type.h"
-
+#include <stdint.h>  // For standard types
+#include "lwip/api.h" // For netconn functions
 
 #define HTTP_HEADER_BUFFER_SIZE 512u  // Adjust based on expected body size
 

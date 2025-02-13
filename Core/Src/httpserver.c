@@ -58,7 +58,7 @@ static void http_server(struct netconn *conn)
 		(void)receive_http_body(conn, content_length, network_buffer, rx_buffer, rx_buflen, recv_err);
 	}
 	// send to router
-	handle_request(request_type);
+	handle_request(conn, request_type);
 
 	/* Close the connection (server closes in HTTP) */
 //	netconn_close(conn);

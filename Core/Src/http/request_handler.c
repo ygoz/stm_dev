@@ -11,14 +11,14 @@
 
 // Function to handle the request based on the type
 void handle_request(struct netconn *conn, HttpRequestType request_type) {
-	int counter = 0;
+
     switch (request_type) {
         case HTTP_GET:
         	GET_requests_router(conn);
 //            break;
 
         case HTTP_POST:
-        	counter++;
+        	POST_requests_router(conn);
             // Add POST-specific logic here
             break;
 

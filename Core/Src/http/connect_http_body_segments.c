@@ -36,7 +36,8 @@ int receive_http_body(struct netconn *conn, int content_length,struct netbuf *ne
     memset(http_body_buffer, 0, sizeof(http_body_buffer)); // Clear buffer, makes sure the buffer is empty before writing new data
 
     // Loops until we've received content_length bytes:
-    while (netconn_recv(conn, &network_buffer) == ERR_OK) {
+    while (recv_err == ERR_OK) {
+    	recv_err = netconn_recv(conn, &network_buffer);
 
         netbuf_data(network_buffer, (void**)&rx_buffer, &rx_buflen); //extracts the data buffer (buf) and its length (buflen) from inbuf
 

@@ -22,6 +22,10 @@ HttpRequestType receive_http_header(struct netconn *conn,struct netbuf *network_
 	netbuf_data(network_buffer, (void**)&rx_buffer, &rx_buflen);
 	// set header in static buffer
 	memcpy(http_header_buffer, rx_buffer, rx_buflen);
+
+
+	netbuf_delete(network_buffer);
+
 	// return type
 	return get_request_type(http_header_buffer);
 }

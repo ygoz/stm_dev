@@ -61,11 +61,11 @@ static void http_server(struct netconn *conn)
 	handle_request(request_type);
 
 	/* Close the connection (server closes in HTTP) */
-	netconn_close(conn);
+//	netconn_close(conn);
 
 	/* Delete the buffer (netconn_recv gives us ownership,
    so we have to make sure to deallocate the buffer) */
-	netbuf_delete(network_buffer);
+//	netbuf_delete(network_buffer);
 }
 
 

@@ -16,6 +16,7 @@
 #include "httpserver.h"
 #include "cmsis_os.h"
 #include "main.h"
+#include "http/connect_http_body_segments.h"
 
 
 osThreadId_t httpThreadHandle;
@@ -25,7 +26,10 @@ const osThreadAttr_t httpTask_attributes = {
     .priority = (osPriority_t) osPriorityNormal,
 };
 
-
+// buffer for incoming segments
+static char request_data[1024] = {0}; // WHERE DOS
+static int total_len = 0;
+const char end_of_http_headers[]= "\r\n\r\n";
 
 const char http_header[] =
 	"HTTP/1.1 200 OK\r\n"
@@ -37,30 +41,81 @@ const char http_header[] =
 const char response_body[] = "hello this is http";
 
 
+const char http_post_response[] =
+                        "HTTP/1.1 200 OK\r\n"
+                        "Content-Type: application/json\r\n"
+                        "Content-Length: 17\r\n"
+                        "\r\n"
+                        "{\"status\":\"OK\"}";
+
 static void http_server(struct netconn *conn)
 {
-	struct netbuf *inbuf;
+	struct netbuf *network_buffer;
 	err_t recv_err;
-	char* buf;
-	u16_t buflen;
+	char* rx_buffer;
+	u16_t rx_buflen;
 
+	int content_length = 0;
+	char *body_start = NULL;
+	int counter = 0;
 	/* Read the data from the port, blocking if nothing yet there */
-	recv_err = netconn_recv(conn, &inbuf);
+
+
+//	testing -- WORKS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	recv_err = netconn_recv(conn, &network_buffer);
+	            netbuf_data(network_buffer, (void**)&rx_buffer, &rx_buflen);
+
+				char *content_length_header = strstr(rx_buffer, "Content-Length:");
+				if (content_length_header) {
+					content_length = atoi(content_length_header + 15);
+				}
+
+
+(void)receive_http_body(conn, content_length, network_buffer, rx_buffer, rx_buflen);
+	//	testing -- WORKS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
 
 	if (recv_err == ERR_OK)
 	{
 		if (netconn_err(conn) == ERR_OK)
 		{
 			/* Get the data pointer and length of the data inside a netbuf */
-			netbuf_data(inbuf, (void**)&buf, &buflen);
+			netbuf_data(network_buffer, (void**)&rx_buffer, &rx_buflen);
 
 			/* Check if request to get the index.html */
-			if (strncmp((char const *)buf, "GET /index.html", 15) == 0) {
+			if (strncmp((char const *)rx_buffer, "GET /index.html", 15) == 0) {
 
 
 			    netconn_write(conn, http_header, strlen(http_header), NETCONN_NOCOPY);
 			    netconn_write(conn, response_body, strlen(response_body), NETCONN_NOCOPY);
 
+			}
+			else if (strncmp(rx_buffer, "POST /postTest", 14) == 0) {
+
+				char *body_start = strstr(rx_buffer, "\r\n\r\n");
+				if (body_start) {
+					body_start += 4;  // Move past "\r\n\r\n"
+
+					// Extract key value (simple parsing)
+					int key_value = -1;
+					char *key_ptr = strstr(body_start, "\"key\":");
+					if (key_ptr) {
+						key_value = atoi(key_ptr + 6);  // Convert number to int
+						printf("Extracted key value: %d\n", key_value);
+					}
+
+
+					netconn_write(conn, http_post_response, strlen(http_post_response), NETCONN_NOCOPY);
+				}
 			}
 
 			else
@@ -76,7 +131,11 @@ static void http_server(struct netconn *conn)
 
 	/* Delete the buffer (netconn_recv gives us ownership,
    so we have to make sure to deallocate the buffer) */
-	netbuf_delete(inbuf);
+	netbuf_delete(network_buffer);
+
+	//TODO //	netconn_close(newconn);
+//	        netconn_delete(newconn);
+//	        netbuf_delete(network_buffer);
 }
 
 

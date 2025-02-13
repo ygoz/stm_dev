@@ -23,6 +23,8 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Core/Src \
+Core/Src/http \
+Core/Src/http/routers \
 Core/Startup \
 Core/ThreadSafe \
 Drivers/BSP/Components/lan8742 \

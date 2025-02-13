@@ -17,6 +17,6 @@ typedef enum {
 } HttpRequestType;
 
 
-HttpRequestType get_request_type(char *request);
+HttpRequestType get_request_type(char *request_header);
 
 #endif /* INC_HTTP_REQUEST_TYPE_H_ */

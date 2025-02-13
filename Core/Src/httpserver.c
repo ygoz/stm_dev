@@ -16,7 +16,10 @@
 #include "httpserver.h"
 #include "cmsis_os.h"
 #include "main.h"
+
 #include "http/connect_http_body_segments.h"
+#include "http/extract_http_header_segment.h"
+#include "http/request_type.h"
 
 
 osThreadId_t httpThreadHandle;
@@ -58,10 +61,20 @@ static void http_server(struct netconn *conn)
 	int content_length = 0;
 	char *body_start = NULL;
 	int counter = 0;
+	HttpRequestType request_type;
 	/* Read the data from the port, blocking if nothing yet there */
 
 
 //	testing -- WORKS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	request_type = receive_http_header(conn, network_buffer, rx_buffer, rx_buflen, recv_err);
+	if (request_type != HTTP_GET){
+		// get content len
+		content_length = extract_content_len();
+
+		// get body
+		(void)receive_http_body(conn, content_length, network_buffer, rx_buffer, rx_buflen);
+	}
+	// send to router
 
 	recv_err = netconn_recv(conn, &network_buffer);
 	            netbuf_data(network_buffer, (void**)&rx_buffer, &rx_buflen);
@@ -72,7 +85,7 @@ static void http_server(struct netconn *conn)
 				}
 
 
-(void)receive_http_body(conn, content_length, network_buffer, rx_buffer, rx_buflen);
+
 	//	testing -- WORKS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 

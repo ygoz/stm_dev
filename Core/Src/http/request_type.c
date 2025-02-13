@@ -9,14 +9,14 @@
 #include "http/request_type.h"
 
 
-HttpRequestType get_request_type(char *request) {
-    if (strncmp(request, "GET", 3u) == 0) {
+HttpRequestType get_request_type(char *request_header) {
+    if (strncmp(request_header, "GET", 3u) == 0) {
         return HTTP_GET;
-    } else if (strncmp(request, "POST", 4u) == 0) {
+    } else if (strncmp(request_header, "POST", 4u) == 0) {
         return HTTP_POST;
-    } else if (strncmp(request, "PUT", 3u) == 0) {
+    } else if (strncmp(request_header, "PUT", 3u) == 0) {
         return HTTP_PUT;
-    } else if (strncmp(request, "DELETE", 6u) == 0) {
+    } else if (strncmp(request_header, "DELETE", 6u) == 0) {
         return HTTP_DELETE;
     }
     return -1; // Unknown request type

@@ -61,7 +61,7 @@ Core/Src/httpserver.o: ../Core/Src/httpserver.c \
  ../Middlewares/Third_Party/LwIP/system/arch/sys_arch.h \
  ../Core/Inc/httpserver.h ../Core/Inc/http/connect_http_body_segments.h \
  ../Core/Inc/http/extract_http_header_segment.h \
- ../Core/Inc/http/request_type.h
+ ../Core/Inc/http/request_type.h ../Core/Inc/http/request_handler.h
 ../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h:
 ../LWIP/Target/lwipopts.h:
 ../Core/Inc/main.h:
@@ -127,3 +127,4 @@ Core/Src/httpserver.o: ../Core/Src/httpserver.c \
 ../Core/Inc/http/connect_http_body_segments.h:
 ../Core/Inc/http/extract_http_header_segment.h:
 ../Core/Inc/http/request_type.h:
+../Core/Inc/http/request_handler.h:

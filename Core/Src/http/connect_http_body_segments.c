@@ -12,7 +12,7 @@ char http_body_buffer[HTTP_BODY_BUFFER_SIZE];
 
 
 
-int receive_http_body(struct netconn *conn, int content_length,struct netbuf *network_buffer, char *rx_buffer, u16_t rx_buflen) {
+int receive_http_body(struct netconn *conn, int content_length,struct netbuf *network_buffer, char *rx_buffer, u16_t rx_buflen, err_t recv_err) {
 	/*
 
 	 @args:

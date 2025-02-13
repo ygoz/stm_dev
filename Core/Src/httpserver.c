@@ -20,6 +20,7 @@
 #include "http/connect_http_body_segments.h"
 #include "http/extract_http_header_segment.h"
 #include "http/request_type.h"
+#include "http/request_handler.h"
 
 
 osThreadId_t httpThreadHandle;
@@ -29,126 +30,42 @@ const osThreadAttr_t httpTask_attributes = {
     .priority = (osPriority_t) osPriorityNormal,
 };
 
-// buffer for incoming segments
-static char request_data[1024] = {0}; // WHERE DOS
-static int total_len = 0;
-const char end_of_http_headers[]= "\r\n\r\n";
 
-const char http_header[] =
-	"HTTP/1.1 200 OK\r\n"
-	"Content-Type: text/plain\r\n"
-	"Content-Length: 18\r\n"
-	"Connection: close\r\n"
-	"\r\n";
-
-const char response_body[] = "hello this is http";
-
-
-const char http_post_response[] =
-                        "HTTP/1.1 200 OK\r\n"
-                        "Content-Type: application/json\r\n"
-                        "Content-Length: 17\r\n"
-                        "\r\n"
-                        "{\"status\":\"OK\"}";
 
 static void http_server(struct netconn *conn)
 {
-	struct netbuf *network_buffer;
-	err_t recv_err;
-	char* rx_buffer;
-	u16_t rx_buflen;
-
-	int content_length = 0;
-	char *body_start = NULL;
-	int counter = 0;
+	/*
+	 * Receives the clients connection - conn
+	 * receives the first TCP segment of the HTTP request, the header
+	 * extracts the request_type from the header - GET, PUT, POST, DELETE
+	 * 		HTTP_GET does not have a body, therefore the header does not contain content length property
+	 * extracts content length from the header
+	 * keep listening to incoming TCP segments until the body is the same size as the content length
+	 * handles the request based on it's type
+	 * closes + deletes the client connection, conn.
+	 */
+	struct netbuf *network_buffer; //  = netbuf_new()
+	err_t recv_err = ERR_OK;
+	char* rx_buffer = NULL;
+	u16_t rx_buflen = 0u;
+	int content_length = 0u;
 	HttpRequestType request_type;
-	/* Read the data from the port, blocking if nothing yet there */
 
-
-//	testing -- WORKS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	request_type = receive_http_header(conn, network_buffer, rx_buffer, rx_buflen, recv_err);
+	// HTTP_GET should not have a body therefore do not have content len inside the headers
 	if (request_type != HTTP_GET){
-		// get content len
 		content_length = extract_content_len();
-
-		// get body
-		(void)receive_http_body(conn, content_length, network_buffer, rx_buffer, rx_buflen);
+		(void)receive_http_body(conn, content_length, network_buffer, rx_buffer, rx_buflen, recv_err);
 	}
 	// send to router
+	handle_request(request_type);
 
-	recv_err = netconn_recv(conn, &network_buffer);
-	            netbuf_data(network_buffer, (void**)&rx_buffer, &rx_buflen);
-
-				char *content_length_header = strstr(rx_buffer, "Content-Length:");
-				if (content_length_header) {
-					content_length = atoi(content_length_header + 15);
-				}
-
-
-
-	//	testing -- WORKS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
-
-
-
-
-
-	if (recv_err == ERR_OK)
-	{
-		if (netconn_err(conn) == ERR_OK)
-		{
-			/* Get the data pointer and length of the data inside a netbuf */
-			netbuf_data(network_buffer, (void**)&rx_buffer, &rx_buflen);
-
-			/* Check if request to get the index.html */
-			if (strncmp((char const *)rx_buffer, "GET /index.html", 15) == 0) {
-
-
-			    netconn_write(conn, http_header, strlen(http_header), NETCONN_NOCOPY);
-			    netconn_write(conn, response_body, strlen(response_body), NETCONN_NOCOPY);
-
-			}
-			else if (strncmp(rx_buffer, "POST /postTest", 14) == 0) {
-
-				char *body_start = strstr(rx_buffer, "\r\n\r\n");
-				if (body_start) {
-					body_start += 4;  // Move past "\r\n\r\n"
-
-					// Extract key value (simple parsing)
-					int key_value = -1;
-					char *key_ptr = strstr(body_start, "\"key\":");
-					if (key_ptr) {
-						key_value = atoi(key_ptr + 6);  // Convert number to int
-						printf("Extracted key value: %d\n", key_value);
-					}
-
-
-					netconn_write(conn, http_post_response, strlen(http_post_response), NETCONN_NOCOPY);
-				}
-			}
-
-			else
-			{
-				/* Load Error page */
-//				netconn_write(conn, (const unsigned char*)(file.data), (size_t)file.len, NETCONN_NOCOPY);
-//				fs_close(&file);
-			}
-		}
-	}
 	/* Close the connection (server closes in HTTP) */
 	netconn_close(conn);
 
 	/* Delete the buffer (netconn_recv gives us ownership,
    so we have to make sure to deallocate the buffer) */
 	netbuf_delete(network_buffer);
-
-	//TODO //	netconn_close(newconn);
-//	        netconn_delete(newconn);
-//	        netbuf_delete(network_buffer);
 }
 
 
@@ -195,8 +112,3 @@ void http_server_init(void *arg)
   osSemaphoreAcquire(startDefaultTaskSemaphore, osWaitForever);
   sys_thread_new("http_thread", http_thread, NULL, 2048, osPriorityNormal);
 }
-
-//void http_server_thread_init()
-//{
-//	http_thread(*arg);
-//}

@@ -9,6 +9,7 @@
 "./Core/Src/system_stm32h7xx.o"
 "./Core/Src/http/connect_http_body_segments.o"
 "./Core/Src/http/extract_http_header_segment.o"
+"./Core/Src/http/request_handler.o"
 "./Core/Src/http/request_type.o"
 "./Core/Src/http/routers/get_router.o"
 "./Core/Src/http/routers/post_router.o"

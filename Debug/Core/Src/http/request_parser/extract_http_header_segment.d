@@ -1,5 +1,5 @@
-Core/Src/http/routers/post_router.o: \
- ../Core/Src/http/routers/post_router.c \
+Core/Src/http/request_parser/extract_http_header_segment.o: \
+ ../Core/Src/http/request_parser/extract_http_header_segment.c \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/api.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h \
  ../LWIP/Target/lwipopts.h ../Core/Inc/main.h \
@@ -60,10 +60,8 @@ Core/Src/http/routers/post_router.o: \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/def.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/sys.h \
  ../Middlewares/Third_Party/LwIP/system/arch/sys_arch.h \
- ../Core/Inc/http/request_parser/extract_http_header_segment.h \
  ../Core/Inc/http/request_parser/request_type.h \
- ../Core/Inc/http/request_parser/connect_http_body_segments.h \
- ../Core/Inc/http/routers/post_router.h
+ ../Core/Inc/http/request_parser/extract_http_header_segment.h
 ../Middlewares/Third_Party/LwIP/src/include/lwip/api.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h:
 ../LWIP/Target/lwipopts.h:
@@ -125,7 +123,5 @@ Core/Src/http/routers/post_router.o: \
 ../Middlewares/Third_Party/LwIP/src/include/lwip/def.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/sys.h:
 ../Middlewares/Third_Party/LwIP/system/arch/sys_arch.h:
-../Core/Inc/http/request_parser/extract_http_header_segment.h:
 ../Core/Inc/http/request_parser/request_type.h:
-../Core/Inc/http/request_parser/connect_http_body_segments.h:
-../Core/Inc/http/routers/post_router.h:
+../Core/Inc/http/request_parser/extract_http_header_segment.h:

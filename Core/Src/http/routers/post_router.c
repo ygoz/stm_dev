@@ -8,8 +8,8 @@
 
 #include <string.h>
 #include "lwip/api.h" // For netconn functions
-#include "http/extract_http_header_segment.h"
-#include "http/connect_http_body_segments.h"
+#include "http/request_parser/extract_http_header_segment.h"
+#include "http/request_parser/connect_http_body_segments.h"
 #include "http/routers/post_router.h"
 
 

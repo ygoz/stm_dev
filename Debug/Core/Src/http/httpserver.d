@@ -1,6 +1,4 @@
-Core/Src/http/routers/post_router.o: \
- ../Core/Src/http/routers/post_router.c \
- ../Middlewares/Third_Party/LwIP/src/include/lwip/api.h \
+Core/Src/http/httpserver.o: ../Core/Src/http/httpserver.c \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h \
  ../LWIP/Target/lwipopts.h ../Core/Inc/main.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
@@ -50,6 +48,7 @@ Core/Src/http/routers/post_router.o: \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/arch.h \
  ../Middlewares/Third_Party/LwIP/system/arch/cc.h \
  ../Middlewares/Third_Party/LwIP/system/arch/cpu.h \
+ ../Middlewares/Third_Party/LwIP/src/include/lwip/api.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/netbuf.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/pbuf.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/err.h \
@@ -60,11 +59,10 @@ Core/Src/http/routers/post_router.o: \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/def.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/sys.h \
  ../Middlewares/Third_Party/LwIP/system/arch/sys_arch.h \
- ../Core/Inc/http/request_parser/extract_http_header_segment.h \
+ ../Core/Inc/http/httpserver.h ../Core/Inc/http/routers/main_router.h \
  ../Core/Inc/http/request_parser/request_type.h \
  ../Core/Inc/http/request_parser/connect_http_body_segments.h \
- ../Core/Inc/http/routers/post_router.h
-../Middlewares/Third_Party/LwIP/src/include/lwip/api.h:
+ ../Core/Inc/http/request_parser/extract_http_header_segment.h
 ../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h:
 ../LWIP/Target/lwipopts.h:
 ../Core/Inc/main.h:
@@ -115,6 +113,7 @@ Core/Src/http/routers/post_router.o: \
 ../Middlewares/Third_Party/LwIP/src/include/lwip/arch.h:
 ../Middlewares/Third_Party/LwIP/system/arch/cc.h:
 ../Middlewares/Third_Party/LwIP/system/arch/cpu.h:
+../Middlewares/Third_Party/LwIP/src/include/lwip/api.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/netbuf.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/pbuf.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/err.h:
@@ -125,7 +124,8 @@ Core/Src/http/routers/post_router.o: \
 ../Middlewares/Third_Party/LwIP/src/include/lwip/def.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/sys.h:
 ../Middlewares/Third_Party/LwIP/system/arch/sys_arch.h:
-../Core/Inc/http/request_parser/extract_http_header_segment.h:
+../Core/Inc/http/httpserver.h:
+../Core/Inc/http/routers/main_router.h:
 ../Core/Inc/http/request_parser/request_type.h:
 ../Core/Inc/http/request_parser/connect_http_body_segments.h:
-../Core/Inc/http/routers/post_router.h:
+../Core/Inc/http/request_parser/extract_http_header_segment.h:

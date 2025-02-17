@@ -5,22 +5,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/http/connect_http_body_segments.c \
-../Core/Src/http/extract_http_header_segment.c \
-../Core/Src/http/request_handler.c \
-../Core/Src/http/request_type.c 
+../Core/Src/http/httpserver.c 
 
 OBJS += \
-./Core/Src/http/connect_http_body_segments.o \
-./Core/Src/http/extract_http_header_segment.o \
-./Core/Src/http/request_handler.o \
-./Core/Src/http/request_type.o 
+./Core/Src/http/httpserver.o 
 
 C_DEPS += \
-./Core/Src/http/connect_http_body_segments.d \
-./Core/Src/http/extract_http_header_segment.d \
-./Core/Src/http/request_handler.d \
-./Core/Src/http/request_type.d 
+./Core/Src/http/httpserver.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -30,7 +21,7 @@ Core/Src/http/%.o Core/Src/http/%.su Core/Src/http/%.cyclo: ../Core/Src/http/%.c
 clean: clean-Core-2f-Src-2f-http
 
 clean-Core-2f-Src-2f-http:
-	-$(RM) ./Core/Src/http/connect_http_body_segments.cyclo ./Core/Src/http/connect_http_body_segments.d ./Core/Src/http/connect_http_body_segments.o ./Core/Src/http/connect_http_body_segments.su ./Core/Src/http/extract_http_header_segment.cyclo ./Core/Src/http/extract_http_header_segment.d ./Core/Src/http/extract_http_header_segment.o ./Core/Src/http/extract_http_header_segment.su ./Core/Src/http/request_handler.cyclo ./Core/Src/http/request_handler.d ./Core/Src/http/request_handler.o ./Core/Src/http/request_handler.su ./Core/Src/http/request_type.cyclo ./Core/Src/http/request_type.d ./Core/Src/http/request_type.o ./Core/Src/http/request_type.su
+	-$(RM) ./Core/Src/http/httpserver.cyclo ./Core/Src/http/httpserver.d ./Core/Src/http/httpserver.o ./Core/Src/http/httpserver.su
 
 .PHONY: clean-Core-2f-Src-2f-http
 

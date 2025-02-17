@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "httpserver.h"
+#include "http/httpserver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

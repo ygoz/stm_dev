@@ -29,6 +29,7 @@ RM := rm -rf
 -include Core/ThreadSafe/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/http/routers/subdir.mk
+-include Core/Src/http/response_manager/subdir.mk
 -include Core/Src/http/request_parser/subdir.mk
 -include Core/Src/http/subdir.mk
 -include Core/Src/subdir.mk

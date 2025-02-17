@@ -25,6 +25,7 @@ SUBDIRS := \
 Core/Src \
 Core/Src/http \
 Core/Src/http/request_parser \
+Core/Src/http/response_manager \
 Core/Src/http/routers \
 Core/Startup \
 Core/ThreadSafe \

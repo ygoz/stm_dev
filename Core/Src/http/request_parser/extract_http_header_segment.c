@@ -17,8 +17,11 @@ char http_header_buffer[HTTP_HEADER_BUFFER_SIZE];
 
 
 HttpRequestType receive_http_header(struct netconn *conn,struct netbuf *network_buffer, char *rx_buffer, u16_t rx_buflen, err_t recv_err) {
+
+    memset(http_header_buffer, 0, sizeof(http_header_buffer)); // Clear buffer, makes sure the buffer is empty before writing new data
+
 	// get header
-	recv_err = netconn_recv(conn, &network_buffer);
+    recv_err = netconn_recv(conn, &network_buffer);
 	netbuf_data(network_buffer, (void**)&rx_buffer, &rx_buflen);
 	// set header in static buffer
 	memcpy(http_header_buffer, rx_buffer, rx_buflen);

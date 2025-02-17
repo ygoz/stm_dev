@@ -58,13 +58,6 @@ static void http_server(struct netconn *conn)
 	}
 	// send to router
 	handle_request(conn, request_type);
-
-	/* Close the connection (server closes in HTTP) */
-//	netconn_close(conn);
-
-	/* Delete the buffer (netconn_recv gives us ownership,
-   so we have to make sure to deallocate the buffer) */
-//	netbuf_delete(network_buffer);
 }
 
 

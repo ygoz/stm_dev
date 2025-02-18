@@ -5,16 +5,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/http/response_manager/status_codes.c \
-../Core/Src/http/response_manager/utils.c 
+../Core/Src/http/response_manager/header_manager.c \
+../Core/Src/http/response_manager/http_write_response.c \
+../Core/Src/http/response_manager/status_codes.c 
 
 OBJS += \
-./Core/Src/http/response_manager/status_codes.o \
-./Core/Src/http/response_manager/utils.o 
+./Core/Src/http/response_manager/header_manager.o \
+./Core/Src/http/response_manager/http_write_response.o \
+./Core/Src/http/response_manager/status_codes.o 
 
 C_DEPS += \
-./Core/Src/http/response_manager/status_codes.d \
-./Core/Src/http/response_manager/utils.d 
+./Core/Src/http/response_manager/header_manager.d \
+./Core/Src/http/response_manager/http_write_response.d \
+./Core/Src/http/response_manager/status_codes.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -24,7 +27,7 @@ Core/Src/http/response_manager/%.o Core/Src/http/response_manager/%.su Core/Src/
 clean: clean-Core-2f-Src-2f-http-2f-response_manager
 
 clean-Core-2f-Src-2f-http-2f-response_manager:
-	-$(RM) ./Core/Src/http/response_manager/status_codes.cyclo ./Core/Src/http/response_manager/status_codes.d ./Core/Src/http/response_manager/status_codes.o ./Core/Src/http/response_manager/status_codes.su ./Core/Src/http/response_manager/utils.cyclo ./Core/Src/http/response_manager/utils.d ./Core/Src/http/response_manager/utils.o ./Core/Src/http/response_manager/utils.su
+	-$(RM) ./Core/Src/http/response_manager/header_manager.cyclo ./Core/Src/http/response_manager/header_manager.d ./Core/Src/http/response_manager/header_manager.o ./Core/Src/http/response_manager/header_manager.su ./Core/Src/http/response_manager/http_write_response.cyclo ./Core/Src/http/response_manager/http_write_response.d ./Core/Src/http/response_manager/http_write_response.o ./Core/Src/http/response_manager/http_write_response.su ./Core/Src/http/response_manager/status_codes.cyclo ./Core/Src/http/response_manager/status_codes.d ./Core/Src/http/response_manager/status_codes.o ./Core/Src/http/response_manager/status_codes.su
 
 .PHONY: clean-Core-2f-Src-2f-http-2f-response_manager
 

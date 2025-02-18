@@ -15,12 +15,12 @@ void handle_request(struct netconn *conn, HttpRequestType request_type) {
     switch (request_type) {
         case HTTP_GET:
         	GET_requests_router(conn);
-//            break;
+            break;
 
         case HTTP_POST:
         	POST_requests_router(conn);
             // Add POST-specific logic here
-//            break;
+            break;
 
         case HTTP_PUT:
             // Add PUT-specific logic here

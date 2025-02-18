@@ -32,7 +32,8 @@ char* create_http_header(HttpStatusCode status_code, size_t content_length) {
              "HTTP/1.1 %d %s\r\n"         // Status Line
              "Content-Type: text/plain\r\n" // Content-Type (hardcoded as text/plain)
              "Content-Length: %lu\r\n"     // Content-Length header based on content size
-             "Connection: close\r\n"       // Connection: close (for this example)
+    		 "Connection: keep-alive\r\n"
+    		//"Connection: close\r\n"       // Connection: close (for this example)
              "\r\n",                      // Blank line to separate headers from body
              status_code, status_message, (unsigned long)content_length);
 

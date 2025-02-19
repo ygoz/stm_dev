@@ -309,7 +309,8 @@ void StartDefaultTask(void *argument)
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
   osDelay(1000);
-  HAL_GPIO_WritePin(GPIOB, LED_RED_Pin, GPIO_PIN_SET);
+//  HAL_GPIO_WritePin(GPIOB, LED_RED_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOE, LED_YELLOW_Pin, GPIO_PIN_SET);
   osSemaphoreRelease(startDefaultTaskSemaphore);
 //  http_server_init();
   /* Infinite loop */

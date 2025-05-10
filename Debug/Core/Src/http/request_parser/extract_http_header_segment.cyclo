@@ -1,0 +1,2 @@
+../Core/Src/http/request_parser/extract_http_header_segment.c:19:17:receive_http_header	1
+../Core/Src/http/request_parser/extract_http_header_segment.c:36:5:extract_content_len	2

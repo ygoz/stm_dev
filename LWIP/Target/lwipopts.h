@@ -54,7 +54,7 @@
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
 /*----- Default Value for MEM_SIZE: 1600 ---*/
-#define MEM_SIZE 32232
+#define MEM_SIZE 32000
 /*----- Default Value for F7/H7 devices: 0x30044000 -----*/
 #define LWIP_RAM_HEAP_POINTER 0x30000200
 /*----- Value supported for H7 devices: 1 -----*/
@@ -93,6 +93,12 @@
 #define DEFAULT_ACCEPTMBOX_SIZE 6
 /*----- Value in opt.h for RECV_BUFSIZE_DEFAULT: INT_MAX -----*/
 #define RECV_BUFSIZE_DEFAULT 2000000000
+/*----- Default Value for LWIP_HTTPD: 0 ---*/
+#define LWIP_HTTPD 1
+/*----- Default Value for LWIP_HTTPD_SSI_BY_FILE_EXTENSION: 1 ---*/
+#define LWIP_HTTPD_SSI_BY_FILE_EXTENSION 0
+/*----- Default Value for LWIP_HTTPD_SUPPORT_POST: 0 ---*/
+#define LWIP_HTTPD_SUPPORT_POST 1
 /*----- Value in opt.h for LWIP_STATS: 1 -----*/
 #define LWIP_STATS 0
 /*----- Value in opt.h for CHECKSUM_GEN_IP: 1 -----*/
